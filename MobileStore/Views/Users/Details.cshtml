@@ -1,0 +1,79 @@
+﻿@model MobileStoreMarket.Models.User
+
+@{ ViewData["Title"] = "Details"; }
+<head>
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+
+
+
+
+<section class="confirmation_part section_padding">
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="confirmation_tittle">
+                </div>
+            </div>
+            <div class="col-lg-12 col-lx-4">
+                <div class="single_confirmation_details">
+
+                    <h4>User information</h4>
+
+                    <tbody>
+                        @Html.DisplayFor(model => model.UserName)
+
+                        <ul>
+                            <div>
+                                <li>
+                                    <p>User Name</p><span>:     @Html.DisplayFor(model => model.firstName)</span>
+                                </li>
+
+
+                                <li>
+                                    <p>First name</p><span>:     @Html.DisplayFor(model => model.firstName)</span>
+                                </li>
+
+                                <li>
+                                    <p>Last Name</p>
+                                    <span>
+                                        :
+                                        @Html.DisplayFor(model => model.LastName)
+
+                                    </span>
+                                </li>
+                                <li>
+                                    <p>Phone mumber </p>
+                                    <span>
+                                        @Html.DisplayFor(model => model.Phone)
+                                    </span>
+                                </li>
+                                <li>
+                                    <p>Email </p>
+                                    <span>
+                                        @Html.DisplayFor(model => model.Email)
+                                    </span>
+                                </li>
+                                <li>
+                                    <p>My Orders </p>
+                                    <span>
+                                        <a asp-action="Details" asp-controller="Orders"
+                                           style="color: red;">My Orders</a>
+                                    </span>
+                                </li>
+                                <li>
+                        </ul>
+
+
+
+
+                    </tbody>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>

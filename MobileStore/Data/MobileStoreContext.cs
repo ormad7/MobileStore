@@ -15,5 +15,7 @@ namespace MobileStore.Data
         }
 
         public DbSet<MobileStoreMarket.Models.Branch> Branch { get; set; }
+
+        public DbSet<MobileStoreMarket.Models.User> User { get; set; }
     }
 }
