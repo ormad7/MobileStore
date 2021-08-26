@@ -36,6 +36,6 @@ namespace MobileStoreMarket.Models
         [DisplayName("Open on Saturday")]
         public Boolean IsSaturday { get; set; }
         // add for relations with Orders
-       public virtual List<Orders> Orders { get; set; }
+       //public virtual List<Orders> Orders { get; set; }
     }
 }
