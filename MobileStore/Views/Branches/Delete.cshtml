@@ -1,0 +1,58 @@
+﻿@model MobileStoreMarket.Models.Branch
+
+@{ ViewData["Title"] = "Delete"; }
+
+<!-- Custom stlylesheet -->
+<link type="text/css" rel="stylesheet" href="~/css/Branch/Branches.css" />
+<link type="text/css" rel="stylesheet" href="~/css/model.css" />
+
+<div class="section">
+    <div class="container">
+        <div class="section-title">
+            <h3 class="title">Delete branch</h3>
+            <div class='delete_form_container'>
+                <h3>Are you sure you want to delete this branch?</h3>
+                <div class='create_edit_form'>
+                    <div>
+                        <label class="delete_lable">@Html.DisplayNameFor(model => model.Name):</label>
+                        @Html.DisplayFor(model => model.Name)
+                    </div>
+                    <div>
+                        <label class="delete_lable">@Html.DisplayNameFor(model => model.City):</label>
+                        @Html.DisplayFor(model => model.City)
+                    </div>
+                    <div>
+                        <label class="delete_lable">@Html.DisplayNameFor(model => model.Address):</label>
+                        @Html.DisplayFor(model => model.Address)
+                    </div>
+                    <div>
+                        <label class="delete_lable">@Html.DisplayNameFor(model => model.Telephone):</label>
+                        @Html.DisplayFor(model => model.Telephone)
+                    </div>
+                    <div>
+                        <label class="delete_lable">@Html.DisplayNameFor(model => model.IsSaturday):</label>
+                        @{ if (Model.IsSaturday)
+                            { <text>Yes</text> }
+                        else
+                        { <text>No</text> } }
+                    </div>
+                    <div>
+                        <label class="delete_lable">@Html.DisplayNameFor(model => model.Long):</label>
+                        @Html.DisplayFor(model => model.Long)
+                    </div>
+                    <div>
+                        <label class="delete_lable">@Html.DisplayNameFor(model => model.Lat):</label>
+                        @Html.DisplayFor(model => model.Lat)
+                    </div>
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Id" />
+                        <div class='submit'>
+                            <input type="submit" value="Delete" class="primary-btn" />
+                            <a asp-action="Index">Back to full list</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

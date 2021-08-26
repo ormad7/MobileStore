@@ -1,0 +1,178 @@
+﻿@model IEnumerable<MobileStoreMarket.Models.Branch>
+
+@{ ViewData["Title"] = "Index"; }
+
+<!-- Custom stlylesheet -->
+<link type="text/css" rel="stylesheet" href="~/css/Branch/Branches.css" />
+<link type="text/css" rel="stylesheet" href="~/css/model.css" />
+
+<div class="section">
+    <div class="container branch_container">
+        <div class="branches_map_table_container">
+            <div class="branches_form_table_container">
+                <form asp-action="Search" method="get" id="SearchForm">
+                    <div class="form-actions no-color">
+                        <div class="branches_search">
+                            <select name="Name" class="input-select branch_search_field" value=@ViewData["BranchesNameQuery"]>
+                                <option value="">All Branches</option>
+                                @foreach (var item in Model)
+                                {
+                    <option>@Html.DisplayFor(modelItem => item.Name)</option>
+}
+                            </select>
+                            <select name="City" class="input-select branch_search_field" value=@ViewData["BranchesCityQuery"]>
+                                <option value="">All Cities</option>
+                                @foreach (var item in Model.Select(item => item.City).Distinct())
+                                {
+                    <option>@item</option>
+}
+                            </select>
+                            <select name="Address" class="input-select branch_search_field" value=@ViewData["BranchesAddressQuery"]>
+                                <option value="">All Addresses</option>
+                                @foreach (var item in Model)
+                                {
+                    <option>@Html.DisplayFor(modelItem => item.Address)</option>
+}
+                            </select>
+                        </div>
+                        <div class='submit'>
+                            <input id="SearchButton" type="button" value="Search" class="primary-btn" />
+                            <a asp-action="Index">Back to full list</a>
+                        </div>
+                    </div>
+                </form>
+                <table class="table model_table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.City)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Address)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Telephone)
+                            </th>
+                            <th style="text-align: center;">
+                                @Html.DisplayNameFor(model => model.IsSaturday)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telephone)
+                </td>
+                <td style="text-align: center;">
+                    @Html.DisplayFor(modelItem => item.IsSaturday)
+                </td>
+                @{ if (User.Identity.IsAuthenticated && User.Claims.ElementAt(3).Value == "Admin")
+                    {
+    <td>
+        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+    </td>
+ } }
+            </tr>
+}
+                    </tbody>
+                </table>
+                <td>
+                    @{ if (User.Identity.IsAuthenticated && User.Claims.ElementAt(3).Value == "Admin")
+                        {
+            <button type="button" class="btn btn-primary btn-sm" line-height=0> <a asp-action="Create">Add Branch</a></button> } }
+                </td>
+            </div>
+            <div id="branches_index_map" class="branches_index_map"></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+    <script src="~/js/Branch/search.js"></script>
+    <script id="restuls" type="text/html">
+        <tr>
+            <td>
+                ${name}
+            </td>
+            <td>
+                ${city}
+            </td>
+            <td>
+                ${address}
+            </td>
+            <td>
+                ${telephone}
+            </td>
+            <td style="text-align: center;">
+                {{if isSaturday}}
+                <input checked="checked" class="check-box" disabled="disabled" type="checkbox">
+                {{else}}
+                <input class="check-box" disabled="disabled" type="checkbox">
+                {{/if}}
+            </td>
+            <td>
+                <a href="/Branches/Edit/${id}">Edit</a> |
+                <a href="/Branches/Delete/${id}">Delete</a>
+            </td>
+        </tr>
+    </script>
+    <script>
+    var map;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('branches_index_map'), {
+            center: { lat: 32.017, lng: 34.78 },
+            zoom: 9
+        });
+
+        var branches = [];
+        @foreach(var x in Model)
+        {
+            @: branches.push({ lat: @x.Lat, lng: @x.Long, name: '@x.Name', city: '@x.City', address: '@x.Address', phone: '@x.Telephone' });
+        }
+
+        branches.map(x => {
+            var marker = new google.maps.Marker({
+                position: { lat: x.lat, lng: x.lng },
+                animation: google.maps.Animation.DROP,
+                map: map
+            });
+
+            var infowindow = new google.maps.InfoWindow({
+                content: generateContent(x)
+            });
+
+            marker.addListener('click', function () {
+                infowindow.open(map, marker);
+            });
+        });
+    }
+
+    function generateContent(branch) {
+        return '<div class="branches_map_window_info">' +
+            '<div>Name: ' + branch.name + '<div></br>' +
+            '<div>City: ' + branch.city + '<div></br>' +
+            '<div>Address: ' + branch.address + '<div></br>' +
+            '<div>Phone: ' + branch.phone + '<div></br>' +
+       '</div>'
+    }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHAZzg-GFQtdb922AM04UgHnFcEcZs_dg&callback=initMap&language=en&region=IL"
+            async defer asp-append-version="true"></script>
+}
