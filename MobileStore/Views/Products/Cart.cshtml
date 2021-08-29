@@ -1,0 +1,143 @@
+﻿@model MobileStore.Models.Orders
+@{ ViewData["Title"] = "Cart"; }
+
+
+<!-- slider Area Start-->
+<div class="slider-area ">
+    <!-- Mobile Menu -->
+    <div class="single-slider slider-height2 d-flex align-items-center" data-background="assets/img/hero/category.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>Cart</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- slider Area End-->
+<!--================Cart Area =================-->
+<section class="cart_area section_padding">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ double sum = 0;
+                                        List<Product> lp = (List<Product>)ViewData["products"];
+                                        foreach (Product p in lp)
+                                        {
+                                            sum += p.Price;
+                            <tr>
+                                <td>
+                                    <div class="media">
+                                        <div class="d-flex">
+                                            <img src="@p.img.ToString()" alt="" />
+                                        </div>
+                                        <div class="media-body">
+                                            <p>@p.Company @p.Name</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5>@{double pr = p.Price / p.Quantity;} @pr$</h5>
+                                </td>
+                                <td>
+                                    <h5>@p.Quantity</h5>
+                                </td>
+                                <td>
+                                    <h5>@p.Price$</h5>
+                                </td>
+                            </tr> } }
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            @{ if (lp.Count != 0)
+                                {
+                    <td>
+                        <h5>Total sum of cart</h5>
+                    </td>
+                                    <td>
+                                        <h5>@sum$</h5>
+                                    </td> }
+                                                else
+                                                {
+                                    <td>
+                                        <h5>Cart is empty</h5>
+                                    </td> } }
+                        </tr>
+                    </tbody>
+                </table>
+                @{ if (lp.Count != 0)
+                    {
+        <form asp-action="Create" asp-controller="Orders" asp-route-TotalPrice="@sum">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-12 form-group p_star">
+                <input asp-for="Address" class="form-control" placeholder="Address" required pattern="{4,16}" title="Length must be 4 to 16 chars" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="col-md-12 form-group p_star">
+                <input asp-for="City" class="form-control" placeholder="City" required pattern="{4,16}" title="Length must be 4 to 16 chars" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="col-md-12 form-group p_star">
+                <input asp-for="Zip" class="form-control" placeholder="Zip Code" required pattern="[0-9]{7}" title="Zip Code must have 7 digits only" />
+                <span asp-validation-for="Zip" class="text-danger"></span>
+            </div>
+            <div class="raw">
+                <div class="col-md-12 form-group p_star">
+                    <input class="form-control" id="credit" placeholder="Credit Card" required pattern="[0-9]{16}" title="Credit Card must have 16 digits only" oninput="check()" maxlength="16">
+                </div>
+                <div class="col-md-12 form-group p_star">
+                    <input class="form-control" placeholder="CVV" required pattern="[0-9]{3}" title="CVV must have 3 digits only">
+                </div>
+                @{ int month = DateTime.Now.Month;
+                                    int year = DateTime.Now.Year;
+                                    if (month == 12)
+                                    {
+                                        year++;
+                                        month = 1;
+                                    }
+
+                                    else
+                                    {
+                                        month++;
+                                    } }
+                <div class="col-md-12 form-group p_star">
+                    <input type="month" id="start" name="start"
+                           min="@year.ToString()-@month.ToString()" required>
+                </div>
+                <script>function check() {
+                                var credit = document.getElementById("credit").value;
+                                var c;
+                                if (credit > 999999999999999) {
+                                    c = credit % 10000;
+                                    document.getElementById("cre").value = c;
+                                }
+
+                            }</script>
+            </div>
+            <div class="col-md-12 form-group p_star">
+                <input asp-for="CreditCard" id="cre" class="form-control" hidden />
+                <span asp-validation-for="CreditCard" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Checkout" class="btn_1 checkout_btn_1" />
+            </div>
+        </form> } }
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Cart Area =================-->

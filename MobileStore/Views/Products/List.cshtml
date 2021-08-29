@@ -1,0 +1,71 @@
+﻿@model IEnumerable<MobileStore.Models.Product>
+
+@{ ViewData["Title"] = "list"; }
+
+<!--<h1>list</h1>-->
+<!-- product list part start-->
+<section>
+    <div class="container">
+
+        <!-- <div class="col-md-4">
+                <div class="product_sidebar">
+                    <div class="single_sedebar">
+        <form asp-action="Search">
+            <input type="text" name="Name" placeholder="Search keyword">
+            <i class="ti-search"></i>
+        </form>
+                </div>
+                    @{ if (User.Identity.IsAuthenticated && User.Claims.ElementAt(3).Value == "Admin")
+                        {
+                            <div class="d-none d-lg-block"> <a asp-action="Create" class="btn header-btn">Add Phone</a></div>
+                        }
+                    }
+
+                </div>
+            </div> -->
+
+        <div class="row">
+
+            @foreach (var item in Model)
+            {
+                string controllerForDetails = "";
+
+                if (item.ProductType == "Phone")
+                    controllerForDetails = "Phones";
+
+                if (item.ProductType == "PC")
+                    controllerForDetails = "Pcs";
+
+                if (item.ProductType == "Screen")
+                    controllerForDetails = "Screens";
+
+                if (item.Quantity <= 0)
+                    continue;
+
+<div class="col-4">
+
+    <a asp-action="Details" asp-route-id="@item.Id" asp-controller="@controllerForDetails">
+        <img src="@item.img.ToString()" alt="" class="img-fluid">
+    </a>
+    <h3>
+        <a asp-action="Details" asp-route-id="@item.Id" asp-controller="@controllerForDetails">
+            @Html.DisplayFor(modelItem => item.Company) @Html.DisplayFor(modelItem => item.Name)
+
+        </a>
+    </h3>
+    <p>@item.Price $</p>
+    @{ if (User.Identity.IsAuthenticated && User.Claims.ElementAt(3).Value == "Admin")
+                        {
+        <p>
+            <a asp-action="Edit" asp-route-id="@item.Id" asp-controller="@controllerForDetails" style="color:black">Edit</a> |
+            <a asp-action="Delete" asp-route-id="@item.Id" asp-controller="@controllerForDetails" style="color:red">Delete</a>
+        </p> } }
+</div>}
+
+
+
+        </div>
+
+    </div>
+</section>
+<!-- product list part end-->
