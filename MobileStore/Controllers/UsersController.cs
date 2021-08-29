@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using MobileStore.Data;
 using MobileStore.Models;
 
-namespace MobileStoreMarket.Controllers
+namespace MobileStore.Controllers
 {
     public class UsersController : Controller
     {

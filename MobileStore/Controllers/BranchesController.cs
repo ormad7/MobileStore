@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MobileStore.Data;
-using MobileStoreMarket.Models;
+using MobileStore.Models;
 
 namespace MobileStore.Controllers
 {

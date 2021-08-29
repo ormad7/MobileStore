@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using MobileStoreMarket.Models;
+using MobileStore.Models;
 
 namespace MobileStore.Data
 {
@@ -14,8 +14,8 @@ namespace MobileStore.Data
         {
         }
 
-        public DbSet<MobileStoreMarket.Models.Branch> Branch { get; set; }
+        public DbSet<MobileStore.Models.Branch> Branch { get; set; }
 
-        public DbSet<MobileStoreMarket.Models.User> User { get; set; }
+        public DbSet<MobileStore.Models.User> User { get; set; }
     }
 }
