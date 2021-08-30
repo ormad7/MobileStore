@@ -38,7 +38,7 @@ namespace MobileStore.Models
 
         public int CreditCard { get; set; }
 
-        //public ICollection<ProductOrder> ProductsOrders { get; set; }
+        public ICollection<ProductOrder> ProductsOrders { get; set; }
 
 
     }
