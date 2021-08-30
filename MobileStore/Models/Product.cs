@@ -34,7 +34,7 @@ namespace MobileStore.Models
         [Required]
         public string img { get; set; }
 
-        //public ICollection<ProductOrder> ProductsOrders { get; set; }
+        public ICollection<ProductOrder> ProductsOrders { get; set; }
 
     }
 }
