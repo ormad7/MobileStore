@@ -19,5 +19,7 @@ namespace MobileStore.Data
         public DbSet<MobileStore.Models.User> User { get; set; }
 
         public DbSet<MobileStore.Models.Product> Product { get; set; }
+        public IQueryable<Orders> Orders { get; internal set; }
+        public DbSet<MobileStore.Models.Orders> Orders_1 { get; set; }
     }
 }

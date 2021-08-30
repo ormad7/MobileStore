@@ -1,0 +1,25 @@
+﻿@model IEnumerable<MobileStore.Models.Orders>
+
+@{ ViewData["Title"] = "Index"; }
+
+
+
+<section class="confirmation_part section_padding">
+    @foreach (var item in Model)
+    {
+<h1>@item.Id</h1>}
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.DateOfOrder)
+    </td>
+    <td>
+        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+    </td>
+</tr>}
+    </tbody>
+    </table>

@@ -1,0 +1,95 @@
+﻿@model IEnumerable<MobileStore.Models.Orders>
+
+@{ ViewData["Title"] = "My Orders"; }
+
+@*<table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Order Price</th>
+                <th scope="col">Order Date</th>
+                <th scope="col">Order Products</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ foreach (Orders item in Model)
+                {
+                    <tr>
+                        <td>
+                            <h5>@item.TotalPrice $</h5>
+                        </td>
+                        <td>
+                            <h5>@item.DateOfOrder.Date.Day.ToString()/@item.DateOfOrder.Date.Month.ToString()/@item.DateOfOrder.Date.Year.ToString()</h5>
+                        </td>
+                        <td>
+                            <a asp-action="Index" asp-controller="ProductOrders" asp-route-id="@item.Id"
+                               style="color: black;"  >Products</a>
+                        </td>
+                    </tr>
+                    }
+                }
+        </tbody>
+    </table>
+    <div>
+
+    </div>*@
+
+
+
+
+
+<section class="confirmation_part section_padding">
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="confirmation_tittle">
+                </div>
+            </div>
+            <div class="col-lg-12 col-lx-4">
+                <div class="single_confirmation_details">
+
+                    <h4>order info</h4>
+
+                    <tbody>
+                        @foreach (Orders item in Model)
+                        {
+            <ul>
+                <div>
+
+
+
+                    <li>
+                        <p>Total Price</p><span>: $ @item.TotalPrice $</span>
+                    </li>
+
+                    <li>
+                        <p>data</p>
+                        <span>
+                            :
+                            @item.DateOfOrder.Date.Day.ToString()/@item.DateOfOrder.Date.Month.ToString()/@item.DateOfOrder.Date.Year.ToString()
+
+                        </span>
+                    </li>
+                    <li>
+                        <p>Order Information </p>
+                        <span>
+                            <a asp-action="Index" asp-controller="ProductOrders" asp-route-id="@item.Id"
+                               style="color: red;"><h5>Order Information </h5></a>
+                        </span>
+                    </li>
+                </div>
+                <br />
+            </ul>}
+                    </tbody>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <span>Thank you. Your order has been received.</span>
+
+</section>
