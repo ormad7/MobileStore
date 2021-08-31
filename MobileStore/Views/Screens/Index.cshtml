@@ -1,0 +1,82 @@
+﻿@model IEnumerable<MobileStore.Models.Screen>
+
+@{ ViewData["Title"] = "Screens"; }
+
+<!-- slider Area Start-->
+<div class="slider-area ">
+    <!-- Mobile Menu -->
+    <div class="single-slider slider-height2 d-flex align-items-center" data-background="assets/img/hero/category.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center">
+                        <h2>Our Screens</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- slider Area End-->
+<!-- product list part start-->
+<section class="product_list">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="product_sidebar">
+                    <form asp-action="Search" id="myForm">
+                        <div class="single_sedebar">
+                            <input id="name" name="name" autocomplete="off" placeholder="Enter phone name" />
+                        </div>
+                        <div class="single_sedebar">
+                            <input id="price" name="price" autocomplete="off" placeholder="Enter phone price" />
+                        </div>
+                        <input type="submit" value="Search" class="btn btn-primary" />
+                    </form>
+                    @{ if (User.Identity.IsAuthenticated && User.Claims.ElementAt(3).Value == "Admin")
+                                    {
+                        <div class="d-none d-lg-block"> <a asp-action="Create" class="btn header-btn">Add Screen</a></div> } }
+
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="product_list">
+                    <div class="row">
+                        @foreach (var item in Model)
+                        {
+                            if (item.Quantity <= 0)
+                                continue;
+
+            <div class="col-lg-6 col-sm-6">
+                <div class="single_product_item">
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        <img src="@item.img.ToString()" alt="" class="img-fluid">
+                    </a>
+                    <h3>
+                        <a asp-action="Details" asp-route-id="@item.Id">
+                            @Html.DisplayFor(modelItem => item.Company) @Html.DisplayFor(modelItem => item.Name)
+                            @Html.DisplayFor(modelItem => item.Size) ″
+
+                        </a>
+                    </h3>
+                    <p>@item.Price $</p>
+                    @{ if (User.Identity.IsAuthenticated && User.Claims.ElementAt(3).Value == "Admin")
+                                        {
+                        <p>
+                            <a asp-action="Edit" asp-route-id="@item.Id" style="color:black">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id" style="color:red">Delete</a>
+                        </p> } }
+                </div>
+            </div>}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- product list part end-->
+
+@section Scripts {
+    <script src="~/js/search.js"></script>
+}
