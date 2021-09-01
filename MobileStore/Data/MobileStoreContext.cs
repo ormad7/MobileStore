@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MobileStore.Models;
+using MobileStoreMarket.Models;
 
 namespace MobileStore.Data
 {
@@ -25,5 +26,7 @@ namespace MobileStore.Data
         public DbSet<MobileStore.Models.ProductOrder> ProductOrder { get; set; }
         //public IQueryable<Orders> Orders { get; internal set; }
         public DbSet<MobileStore.Models.Screen> Screen { get; set; }
+        //public IQueryable<Orders> Orders { get; internal set; }
+        public DbSet<MobileStoreMarket.Models.Pc> Pc { get; set; }
     }
 }
