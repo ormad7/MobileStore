@@ -22,7 +22,18 @@ namespace MobileStore.Controllers
         // GET: Branches
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Branch.ToListAsync());
+            return View(await _context.Branch.AsNoTracking().ToListAsync());
+        }
+
+        public async Task<IActionResult> Search(string Name, string City, string Address)
+        {
+            var query = from b in _context.Branch
+                        where EF.Functions.Like(b.Name, "%" + Name) &&
+                              EF.Functions.Like(b.City, "%" + City) &&
+                              EF.Functions.Like(b.Address, "%" + Address)
+                        select new { id = b.Id, name = b.Name, city = b.City, address = b.Address, telephone = b.Telephone, isSaturday = b.IsSaturday };
+
+            return Json(await query.ToListAsync());
         }
 
         // GET: Branches/Details/5
@@ -50,8 +61,8 @@ namespace MobileStore.Controllers
         }
 
         // POST: Branches/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Lat,Long,Name,City,Address,Telephone,IsSaturday")] Branch branch)
@@ -62,7 +73,43 @@ namespace MobileStore.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(branch);
+            return BadRequest();
+        }
+
+        public async Task<IActionResult> ValidateCreate(double Lat, double Long, string Name)
+        {
+            string strLoc = null;
+            string strName = null;
+
+            if (await _context.Branch.AnyAsync(b => b.Lat == Lat && b.Long == Long))
+            {
+                strLoc = "There is a branch at this location, please enter different location";
+            }
+
+            if (await _context.Branch.AnyAsync(b => b.Name == Name))
+            {
+                strName = "There is a branch with this name, please enter different name";
+            }
+
+            return Json(new { loc = strLoc, name = strName });
+        }
+
+        public async Task<IActionResult> ValidateEdit(int id, double Lat, double Long, string Name)
+        {
+            string strLoc = null;
+            string strName = null;
+
+            if (await _context.Branch.AnyAsync(b => b.Id != id && b.Lat == Lat && b.Long == Long))
+            {
+                strLoc = "There is a branch at this location, please enter different location";
+            }
+
+            if (await _context.Branch.AnyAsync(b => b.Id != id && b.Name == Name))
+            {
+                strName = "There is a branch with this name, please enter different name";
+            }
+
+            return Json(new { loc = strLoc, name = strName });
         }
 
         // GET: Branches/Edit/5
@@ -82,8 +129,8 @@ namespace MobileStore.Controllers
         }
 
         // POST: Branches/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Lat,Long,Name,City,Address,Telephone,IsSaturday")] Branch branch)
@@ -140,7 +187,12 @@ namespace MobileStore.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var branch = await _context.Branch.FindAsync(id);
+            if (branch == null)
+            {
+                return View("Views/Branches/NotFound.cshtml");
+            }
             _context.Branch.Remove(branch);
+            branch.Orders.ToList().ForEach(ord => branch.Orders.Remove(ord));
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
