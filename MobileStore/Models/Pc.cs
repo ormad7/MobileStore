@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MobileStoreMarket.Models
+namespace MobileStore.Models
 {
     public class Pc : Product
     {

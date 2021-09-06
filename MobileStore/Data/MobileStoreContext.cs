@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MobileStore.Models;
-using MobileStoreMarket.Models;
 
 namespace MobileStore.Data
 {
@@ -14,6 +13,22 @@ namespace MobileStore.Data
             : base(options)
         {
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProductOrder>()
+                 .HasKey(po => new { po.ProductId, po.OrderId });
+
+            modelBuilder.Entity<ProductOrder>()
+                .HasOne(po => po.Product)
+                .WithMany(o => o.ProductsOrders)
+                .HasForeignKey(po => po.ProductId);
+
+            modelBuilder.Entity<ProductOrder>()
+                .HasOne(po => po.Orders)
+                .WithMany(o => o.ProductsOrders)
+                .HasForeignKey(po => po.OrderId);
+        }
+
 
         public DbSet<MobileStore.Models.Branch> Branch { get; set; }
 

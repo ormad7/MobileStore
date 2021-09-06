@@ -1,0 +1,33 @@
+﻿@{ ViewData["Title"] = "Index"; }
+
+<!-- Custom stlylesheet -->
+<link type="text/css" rel="stylesheet" href="~/css/model.css" />
+<link rel="stylesheet" href="~/css/Statistics/Statistics.css">
+
+<div class="section">
+    <div class="container page_container">
+        <div class="section-title">
+
+            <h3 class="title">Statistics</h3>
+
+            <div class="stats_container">
+
+                <h4 class="title">Total income by product type:</h4>
+                <div class="graph" id="IncomeByTypeGraph"> </div>
+
+                <h4 class="title">Total amount of items sold by Product:</h4>
+                <div class="graph" id="OrdersBySupplierGraph"> </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src='~/lib/jquery1/dist/jquery.js'></script>
+    <script src="~/lib/d3/d31.js"></script>
+    <script src="~/js/Statistics/statistics.js"></script>
+}
