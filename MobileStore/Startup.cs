@@ -1,15 +1,17 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MobileStore.Data;
+using Microsoft.CodeAnalysis.Options;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace MobileStore
 {
@@ -29,6 +31,15 @@ namespace MobileStore
 
             services.AddDbContext<MobileStoreContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MobileStoreContext")));
+
+            services.AddSession(options => options.IdleTimeout = TimeSpan.FromMinutes(1));
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(60);
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,13 +60,18 @@ namespace MobileStore
 
             app.UseRouting();
 
+
+            app.UseSession();
+            app.UseAuthentication();
+
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Products}/{action=Index}/{id?}");
             });
         }
     }

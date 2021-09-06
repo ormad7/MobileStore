@@ -1,0 +1,217 @@
+﻿﻿.page_container {
+    direction: ltr;
+}
+
+.model_table thead {
+    border-bottom: 3px solid #D10024;
+}
+
+.model_table tr {
+    border-bottom: 2px solid #E4E7ED;
+}
+
+.submit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    direction: ltr;
+}
+
+.plus_btn {
+    height: 40px;
+    width: 40px;
+    background: #D10024;
+    border-radius: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+}
+
+.plus_text {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFF;
+    font-size: 24px;
+}
+
+.plus_text:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.title_section {
+    display: flex;
+}
+
+.title {
+    padding-top: 5px;
+}
+
+.create_edit_container {
+    justify-content: center;
+    margin-top: 16px;
+    display: flex;
+}
+
+.create_edit_form {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+    padding: 16px;
+    min-width: 360px;
+}
+
+.create_edit_form textarea {
+    resize: none;
+}
+
+.delete_form_container {
+    margin-left: 128px;
+    margin-left: 128px;
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.delete_lable {
+    width: 100px;
+}
+
+.weather_container {
+    display: flex;
+}
+
+.weather_title {
+    margin-left: 20px;
+    padding-top: 10px
+}
+
+.section-video-canvas {
+    height: 100%;
+    display: flex;
+}
+
+.section-video {
+    width: 50%;
+    padding-right: 5px;
+}
+
+.section-video video {
+    width: 100%;
+    height: 100%;
+}
+
+.section-canvas {
+    width: 50%;
+    padding-left: 5px;
+}
+
+.section-canvas canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.terms_modal_content {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+    padding: 20px;
+    text-align: justify;
+    -webkit-column-gap: 50px;
+    -moz-column-gap: 50px;
+    column-gap: 50px;
+    width: 100%;
+    font-family: terms-font;
+}
+
+.terms_modal_content_title {
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+.terms_modal{
+    width: 800px;
+}
+
+.terms_modal_title {
+    text-align: center;
+    font-size: 30px !important;
+    line-height: 60px;
+    font-weight: 700;
+    color: white;
+    margin-top: 20px !important;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+@font-face {
+    font-family: terms-font;
+    src: url(/fonts/RobotoLight.woff);
+    font-size: 15px; 
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-menu a:hover {
+    background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* not used */
+.map_model_table_container {
+    display: flex;
+    height: 100%;
+}
+
+.index_map {
+    width: 40%;
+}
+
+.form_model_table_container {
+    width: 60%;
+    margin-left: 16px;
+    overflow: auto;
+    padding: 16px;
+}
+
+.model_table th {
+    text-align: left;
+}
+
+.model_table td {
+    direction: ltr;
+    text-align: left;
+}
+
+.search {
+    flex-direction: row-reverse;
+    display: flex;
+    align-items: center;
+    direction: ltr;
+}
+
+.search_field {
+    margin-left: 15px;
+    direction: rtl;
+    border-radius: 3px;
+    border: 2px solid #E4E7ED;
+}
+
+.btn {
+    height: 40px;
+    width: 120px;
+    background: #D10024;
+    color: #FFF;
+    font-weight: 700;
+    border: none;
+    border-radius: 3px;
+}

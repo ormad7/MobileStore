@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MobileStore.Data;
 using MobileStore.Data;
-using MobileStoreMarket.Models;
+using MobileStore.Models;
 
 namespace MobileStoreMarket.Controllers
 {

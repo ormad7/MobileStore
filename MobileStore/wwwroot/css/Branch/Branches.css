@@ -1,0 +1,32 @@
+﻿.branch_container {
+    width: 1500px;
+}
+.branches_map_table_container {
+    display: flex;
+    height: 100%;
+}
+
+.branches_index_map {
+    width: 40%;
+}
+
+.branches_form_table_container {
+    width: 60%;
+    margin-left: 16px;
+    overflow: auto;
+    padding: 16px;
+}
+
+.branches_search {
+    align-items: center;
+}
+
+.branch_search_field {
+    margin-right: 10px;
+    border-radius: 3px;
+    border: 2px solid #E4E7ED;
+}
+
+.branches_map_window_info {
+    margin: 8px;
+}
