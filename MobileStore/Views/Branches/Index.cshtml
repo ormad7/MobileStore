@@ -37,7 +37,7 @@
                         </div>
                         <div class='submit'>
                             <input id="SearchButton" type="button" value="Search" class="primary-btn" />
-                            <a asp-action="Index">Back to full list</a>
+                            <button> <a asp-action="Index" class="primary-btn black-color">Back to list</a></button>
                         </div>
                     </div>
                 </form>
@@ -84,8 +84,8 @@
                 @{ if (User.Identity.IsAuthenticated && User.Claims.ElementAt(3).Value == "Admin")
                     {
     <td>
-        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+        <a asp-action="Edit" asp-route-id="@item.Id" style="color:royalblue">Edit</a> |
+        <a asp-action="Delete" asp-route-id="@item.Id" style="color:red" >Delete</a>
     </td>
  } }
             </tr>
@@ -128,8 +128,8 @@
                 {{/if}}
             </td>
             <td>
-                <a href="/Branches/Edit/${id}">Edit</a> |
-                <a href="/Branches/Delete/${id}">Delete</a>
+                <a href="/Branches/Edit/${id}" style="color:royalblue">Edit</a> |
+                <a href="/Branches/Delete/${id}" style="color:red">Delete</a>
             </td>
         </tr>
     </script>
