@@ -12,9 +12,10 @@ namespace MobileStore.Data
         {
             var branches = new Branch[]
                {
-                    new Branch{Name="Netivot Branch",Lat=31.24,Long=34.344,City="Netivot",Address="Netivot Zit 41",Telephone="0525442139",IsSaturday=true},
-                    new Branch{Name="Tel Aviv Branch",Lat=32.08,Long=34.77,City="Tel Aviv",Address="Yehuda Halevii 93",Telephone="0525442139",IsSaturday=false},
-                    new Branch{Name="Rishon Lezion Branch",Lat=31.58,Long=34.47,City="Rishon Lezion",Address="Haetzel 41",Telephone="0526951233",IsSaturday=false},
+                    new Branch{Name="Be'er Sheva Branch",Lat=31.25,Long=34.78,City="Be'er Sheva",Address="St Shimshon 41",Telephone="0533330857",IsSaturday=true},
+                    new Branch{Name="Tel Aviv Branch",Lat=32.08,Long=34.77,City="Tel Aviv",Address="Yehuda Halevii 93",Telephone="0533330857",IsSaturday=false},
+                    new Branch{Name="Rishon Lezion Branch",Lat=31.96,Long=34.79,City="Rishon Lezion",Address="Haetzel 41",Telephone="0539885163",IsSaturday=false},
+                    new Branch{Name="Haifa Branch",Lat=32.78,Long=35,City="Haifa",Address="Grand mall",Telephone="0506943251",IsSaturday=true},
                };
             var users = new User[]
             {
