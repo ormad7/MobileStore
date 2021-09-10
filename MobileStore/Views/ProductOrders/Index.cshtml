@@ -1,13 +1,15 @@
 ﻿@model IEnumerable<MobileStore.Models.ProductOrder>
 
 @{ ViewData["Title"] = "Index";
-                string od = ViewData["order"].ToString();
-                Array order = od.Split(",").ToArray();
-                string d = ViewData["details"].ToString();
-                Array products = d.Split(",").ToArray(); }
+    string od = ViewData["order"].ToString();
+    Array order = od.Split(",").ToArray();
+    string d = ViewData["details"].ToString();
+    Array products = d.Split(",").ToArray(); }
+<br /><br /><br />
+<div class="hero-cap text-center">
+<u><h1 style="font-style:italic">Your order details:</h1></u>
+</div>
 
-<h1>Your order to @order.GetValue(0)</h1>
-<h1>from @order.GetValue(1) paid @order.GetValue(3) $ by credit card: @order.GetValue(2) </h1>
 @*
     <section class="confirmation_part section_padding">
       <div class="container">
@@ -148,11 +150,12 @@
                         <tbody>
                             @for (int i = 0; i < products.Length - 1; i += 4)
                             {
-                <tr>
-                    <th colspan="2"><span> @products.GetValue(i) @products.GetValue(i + 1)</span></th>
-                    <th>x   @products.GetValue(i + 3)</th>
-                    <th> <span>$   @products.GetValue(i + 2) $</span></th>
-                </tr>}
+                                <tr>
+                                    <th colspan="2"><span> @products.GetValue(i) @products.GetValue(i + 1)</span></th>
+                                    <th>x   @products.GetValue(i + 3)</th>
+                                    <th> <span>$   @products.GetValue(i + 2) $</span></th>
+                                </tr>
+}
                         </tbody>
                     </table>
                 </div>
